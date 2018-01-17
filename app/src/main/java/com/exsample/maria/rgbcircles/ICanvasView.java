@@ -6,6 +6,9 @@ package com.exsample.maria.rgbcircles;
  */
 
 public interface ICanvasView {
-    void drawCircle(MainCircle circle);
+    void drawCircle(SimpleCircle circle);
 
+    void reDraw();
+
+    void showMessage(String s);
 }
