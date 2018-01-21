@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Логика игры
  */
 
-public class GameManager {
+class GameManager {
     private static final int MAX_CIRCLES = 10;
     private MainCircle mainCircle;
     private ArrayList<EnemyCircle> circles;
@@ -15,7 +15,7 @@ public class GameManager {
     private static int width;
     private static int height;
 
-    public GameManager(CanvasView canvasView, int w, int h) {
+    GameManager(CanvasView canvasView, int w, int h) {
         this.canvasView = canvasView;
         width = w;
         height = h;
@@ -25,7 +25,7 @@ public class GameManager {
 
     private void initEnamyCircles() {
         SimpleCircle mainCircleArea = mainCircle.getCircleArea();
-        circles = new ArrayList<EnemyCircle>();
+        circles = new ArrayList<>();
         for (int i = 0; i < MAX_CIRCLES; i++) {
             EnemyCircle circle;
             do {
@@ -42,11 +42,11 @@ public class GameManager {
         }
     }
 
-    public static int getWidth() {
+    static int getWidth() {
         return width;
     }
 
-    public static int getHeight() {
+    static int getHeight() {
         return height;
     }
 
@@ -54,21 +54,21 @@ public class GameManager {
         mainCircle = new MainCircle(width / 2, height / 2);
     }
 
-    public void onDraw() {
+    void onDraw() {
         canvasView.drawCircle(mainCircle);
         for (EnemyCircle circle : circles) {
             canvasView.drawCircle(circle);
         }
     }
 
-    public void onTouchEvent(int x, int y) {
+    void onTouchEvent(int x, int y) {
         mainCircle.moveMainCircleWhenTouchAt(x, y);
         checkCollision();
         moveCircles();
     }
 
     private void checkCollision() {
-        SimpleCircle circleForDel = null;
+        EnemyCircle circleForDel = null;
         for (EnemyCircle circle : circles) {
             if (mainCircle.isIntersect(circle)) {
                 if (circle.isSmallerThen(mainCircle)) {

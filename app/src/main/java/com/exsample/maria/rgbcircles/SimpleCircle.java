@@ -6,23 +6,23 @@ package com.exsample.maria.rgbcircles;
  */
 
 public class SimpleCircle {
-    protected int x, y, radius;
+    int x, y, radius;
     private int color;
 
-    public SimpleCircle(int x, int y, int radius) {
+    SimpleCircle(int x, int y, int radius) {
         this.x = x;
         this.y = y;
         this.radius = radius;
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
-    public int getY() {
+    int getY() {
         return y;
     }
 
-    public int getRadius() {
+    int getRadius() {
         return radius;
     }
 
@@ -34,11 +34,11 @@ public class SimpleCircle {
         return color;
     }
 
-    public SimpleCircle getCircleArea() {
+    SimpleCircle getCircleArea() {
         return new SimpleCircle(x, y, radius * 3);
     }
 
-    public boolean isIntersect(SimpleCircle circle) {
+    boolean isIntersect(SimpleCircle circle) {
         return radius + circle.radius >= Math.sqrt(Math.pow(x - circle.x, 2) + Math.pow(y - circle.y, 2));
     }
 }

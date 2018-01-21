@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 /**
  * Created by maria on 14.01.2018.
- * Класс рисует круги
+ * Сцена. Класс рисует круги
  */
 
 class CanvasView extends View implements ICanvasView {
@@ -40,7 +40,7 @@ class CanvasView extends View implements ICanvasView {
 
     private void initWidthAndHeight(Context context) {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = windowManager.getDefaultDisplay();
+        Display display = windowManager.getDefaultDisplay(); // null is not possible
         Point point = new Point();
         display.getSize(point);
         width = point.x;
@@ -77,6 +77,12 @@ class CanvasView extends View implements ICanvasView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            performClick(); // Call this method to handle the response, and
+            // thereby enable accessibility services to
+            // perform this action for a user who cannot
+            // click the touchscreen.
+        }
         int x = (int) event.getX();
         int y = (int) event.getY();
         if (event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -86,8 +92,14 @@ class CanvasView extends View implements ICanvasView {
         return true;
     }
 
+    @Override
+    public boolean performClick() {
+        return super.performClick();
+    }
+
     //TODO
-    public static int recalculateRadius(int radius) {
-        return radius * 768 / width < height ? width : height;
+    public static int adjustSizeForScreenResolution(int size) {
+        return size * (width < height ? width : height) / 768;
+        //return radius * width / 768 ;
     }
 }
